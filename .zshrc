@@ -1,15 +1,14 @@
-# Suppress Powerlevel10k instant prompt warnings
+# -----------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                          
+# Powerlevel10k instant prompt
+# -----------------------------------------------------------------------------
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Ensure Oh My Zsh is installed
+# -----------------------------------------------------------------------------
+# Oh My Zsh (optional for OMZ plugins)
+# -----------------------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
 if [ ! -d "$ZSH" ]; then
   echo "Installing Oh My Zsh..."
@@ -17,52 +16,93 @@ if [ ! -d "$ZSH" ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-# Enable Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Plugins to load (these are for Oh My Zsh itself, not zinit)
-plugins=(git pacman colorize command-not-found compleat ufw history-substring-search mosh docker docker-compose eza)
+# -----------------------------------------------------------------------------
+# Zinit setup (Zinit → Zi)
+# -----------------------------------------------------------------------------
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit"
 
-# zinit setup
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if [ ! -f "${ZINIT_HOME}/zinit.zsh" ]; then
+  mkdir -p "$ZINIT_HOME"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+alias zinit=zi
 
-# Load Powerlevel10k
+# -----------------------------------------------------------------------------
+# Zinit plugins
+# -----------------------------------------------------------------------------
+#zinit self-update
+#zinit compile
+
+# Powerlevel10k theme
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
-# Load additional zsh plugins
+# Plugins
+zinit ice wait'1'
 zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
+
+zinit ice wait'1' atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
+
+zinit ice wait'1'
+zinit light zsh-users/zsh-completions
+
+zinit ice wait'1'
 zinit light Aloxaf/fzf-tab
 
-# Load Oh My Zsh plugin snippets (optional, since OMZ is loaded above)
+# Oh My Zsh snippets (optional)
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
-# Enable completions
-autoload -Uz compinit && compinit
+# -----------------------------------------------------------------------------
+# Completions
+# -----------------------------------------------------------------------------
+autoload -Uz compinit
+if [[ ! -f ~/.zcompdump.zwc || ~/.zcompdump -nt ~/.zcompdump.zwc ]]; then
+  compinit -C
+  zcompile ~/.zcompdump
+else
+  compinit -C
+fi
 
-# Replay any deferred zinit loading
+# Apply delayed plugins
 zinit cdreplay -q
 
-# Load Powerlevel10k config
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# -----------------------------------------------------------------------------
+# Powerlevel10k config
+# -----------------------------------------------------------------------------
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# zoxide for smarter `cd`
+# -----------------------------------------------------------------------------
+# Zoxide: smarter `cd`
+# -----------------------------------------------------------------------------
 eval "$(zoxide init zsh)"
 
+# -----------------------------------------------------------------------------
 # Aliases
+# -----------------------------------------------------------------------------
 alias ls='eza'
 alias cat='bat'
 alias df='duf'
 alias cd='z'
+alias zinit='zi'
+alias sudo='sudo-rs'
+
+# -----------------------------------------------------------------------------
+# Additional paths
+# -----------------------------------------------------------------------------
+#export PATH="$HOME/.local/share/zigup/0.14.1/files:$PATH"
+
+# -----------------------------------------------------------------------------
+# Profile shell startup time
+# -----------------------------------------------------------------------------
+#zmodload zsh/zprof
+#zprof
+
+. "$HOME/.local/bin/env"
