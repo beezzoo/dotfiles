@@ -92,7 +92,7 @@ alias cat='bat'
 alias df='duf'
 alias cd='z'
 alias zinit='zi'
-alias sudo='sudo-rs'
+#alias sudo='sudo-rs'
 
 # -----------------------------------------------------------------------------
 # Additional paths
@@ -104,5 +104,3 @@ alias sudo='sudo-rs'
 # -----------------------------------------------------------------------------
 #zmodload zsh/zprof
 #zprof
-
-. "$HOME/.local/bin/env"
