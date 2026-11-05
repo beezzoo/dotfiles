@@ -1,4 +1,4 @@
-# -----------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                          
+# -----------------------------------------------------------------------------
 # Powerlevel10k instant prompt
 # -----------------------------------------------------------------------------
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -30,6 +30,12 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 alias zinit=zi
+
+# -----------------------------------------------------------------------------
+# Screen artifacts fixing
+# -----------------------------------------------------------------------------
+export TERM=screen-256color
+
 
 # -----------------------------------------------------------------------------
 # Zinit plugins
@@ -90,17 +96,46 @@ eval "$(zoxide init zsh)"
 alias ls='eza'
 alias cat='bat'
 alias df='duf'
-alias cd='z'
-alias zinit='zi'
-#alias sudo='sudo-rs'
+#alias cd='z'
+#alias zinit='zi'
+alias sudo='sudo-rs'
+
+alias ida-dev='cd ~/projects/BILabs/IDA_DEV && source venv/bin/activate'
 
 # -----------------------------------------------------------------------------
 # Additional paths
 # -----------------------------------------------------------------------------
-#export PATH="$HOME/.local/share/zigup/0.14.1/files:$PATH"
+export PATH="$HOME/.local/share/zigup/0.14.1/files:$PATH"
 
 # -----------------------------------------------------------------------------
 # Profile shell startup time
 # -----------------------------------------------------------------------------
 #zmodload zsh/zprof
 #zprof
+
+. "$HOME/.local/bin/env"
+export PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
+export TEXMFSYSVAR=/usr/local/texlive/2025/texmf-var
+export PATH="$HOME/.local/bin:$PATH"
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
+[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+
+# -----------------------------------------------------------------------------
+# Custom exports
+# -----------------------------------------------------------------------------
+
+export PATH="$PATH:$(npm config get prefix)/bin"
+
+export EDITOR=vim
+export VISUAL=vim
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# opencode
+export PATH=/home/beezzoo/.opencode/bin:$PATH
+export PATH="$HOME/.local/astracode/bin:$PATH"
+[ -f ~/.config/openbao/env ] && source ~/.config/openbao/env
