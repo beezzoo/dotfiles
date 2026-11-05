@@ -36,7 +36,6 @@ alias zinit=zi
 # -----------------------------------------------------------------------------
 export TERM=screen-256color
 
-
 # -----------------------------------------------------------------------------
 # Zinit plugins
 # -----------------------------------------------------------------------------
@@ -100,26 +99,13 @@ alias df='duf'
 #alias zinit='zi'
 #alias sudo='sudo-rs'   # вынесен в ~/.zshrc.local
 
-alias ida-dev='cd ~/projects/BILabs/IDA_DEV && source venv/bin/activate'
-
-# -----------------------------------------------------------------------------
-# Additional paths
-# -----------------------------------------------------------------------------
-export PATH="$HOME/.local/share/zigup/0.14.1/files:$PATH"
-
 # -----------------------------------------------------------------------------
 # Profile shell startup time
 # -----------------------------------------------------------------------------
 #zmodload zsh/zprof
 #zprof
 
-. "$HOME/.local/bin/env"
-export PATH=/usr/local/texlive/2025/bin/x86_64-linux:$PATH
-export TEXMFSYSVAR=/usr/local/texlive/2025/texmf-var
 export PATH="$HOME/.local/bin:$PATH"
-
-# To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
-[[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
 
 # -----------------------------------------------------------------------------
 # Custom exports
@@ -134,11 +120,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-# opencode
-export PATH=/home/beezzoo/.opencode/bin:$PATH
-export PATH="$HOME/.local/astracode/bin:$PATH"
-[ -f ~/.config/openbao/env ] && source ~/.config/openbao/env
 
 # -----------------------------------------------------------------------------
 # Machine-local overrides (not tracked in dotfiles)
