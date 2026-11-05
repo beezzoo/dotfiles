@@ -1,0 +1,9 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "39aaf6d"
+hash = "12126fca34f9f1802bb57b88292f57af"
+
+[[flavor.deps]]
+use = "bennyyip/gruvbox-dark"
+rev = "619fdc5"
+hash = "d4c7003ec6dc4efd5d3a050d5c2f2575"

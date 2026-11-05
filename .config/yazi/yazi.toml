@@ -1,0 +1,31 @@
+[mgr]
+ratio = [0, 2, 3]
+sort_by = "mtime"
+sort_dir_first = true
+show_hidden = true
+show_symlink = true
+linemode = "size_btime_mtime"
+# Мышь отключена: иначе yazi запрашивает mouse tracking, herdr отдаёт ему все клики/drag,
+# и выделение текста через herdr перестаёт работать. Вернуть: ["click", "scroll", "drag"].
+mouse_events = []
+
+[preview]
+image_filter = "triangle"
+image_quality = 90
+
+[plugin]
+prepend_previewers = [
+  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s="$HOME/.config/glow/gruvbox.json" "$1"' },
+]
+
+# Markdown: Enter -> редактор (как раньше), `o` -> выбор, в т.ч. рендер в glow
+[opener]
+glow = [
+  { run = 'glow -p -s "$HOME/.config/glow/gruvbox.json" "$1"', block = true, desc = "Render markdown (glow)" },
+]
+
+[open]
+prepend_rules = [
+  { url = "*.md", use = ["edit", "glow"] },
+  { url = "*.markdown", use = ["edit", "glow"] },
+]
