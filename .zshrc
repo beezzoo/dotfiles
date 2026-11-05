@@ -98,7 +98,7 @@ alias cat='bat'
 alias df='duf'
 #alias cd='z'
 #alias zinit='zi'
-#alias sudo='sudo-rs'
+#alias sudo='sudo-rs'   # вынесен в ~/.zshrc.local
 
 alias ida-dev='cd ~/projects/BILabs/IDA_DEV && source venv/bin/activate'
 
@@ -139,3 +139,8 @@ eval "$(pyenv virtualenv-init -)"
 export PATH=/home/beezzoo/.opencode/bin:$PATH
 export PATH="$HOME/.local/astracode/bin:$PATH"
 [ -f ~/.config/openbao/env ] && source ~/.config/openbao/env
+
+# -----------------------------------------------------------------------------
+# Machine-local overrides (not tracked in dotfiles)
+# -----------------------------------------------------------------------------
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
