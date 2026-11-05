@@ -1,0 +1,15 @@
+# ~/.config -> dotfiles/.config, поэтому приложения кладут сюда своё состояние,
+# кэши и токены (gh, gcloud, chromium, Code, openbao и т.п.).
+# Игнорируем всё в .config, кроме каталогов, которые ведём в репозитории.
+.config/*
+!.config/bat/
+!.config/eza/
+!.config/glow/
+!.config/superfile/
+!.config/tmux/
+!.config/yazi/
+
+# Мусор редакторов и ОС
+*.swp
+*~
+.DS_Store
