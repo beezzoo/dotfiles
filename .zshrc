@@ -100,26 +100,29 @@ alias df='duf'
 #alias sudo='sudo-rs'   # вынесен в ~/.zshrc.local
 
 # -----------------------------------------------------------------------------
+# Environment
+# -----------------------------------------------------------------------------
+export EDITOR=vim
+export VISUAL=vim
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if command -v npm >/dev/null 2>&1; then
+  export PATH="$PATH:$(npm config get prefix)/bin"
+fi
+
+if command -v pyenv >/dev/null 2>&1; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
+# -----------------------------------------------------------------------------
 # Profile shell startup time
 # -----------------------------------------------------------------------------
 #zmodload zsh/zprof
 #zprof
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# -----------------------------------------------------------------------------
-# Custom exports
-# -----------------------------------------------------------------------------
-
-export PATH="$PATH:$(npm config get prefix)/bin"
-
-export EDITOR=vim
-export VISUAL=vim
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # -----------------------------------------------------------------------------
 # Machine-local overrides (not tracked in dotfiles)
