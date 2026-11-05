@@ -98,7 +98,7 @@ alias cat='bat'
 alias df='duf'
 #alias cd='z'
 #alias zinit='zi'
-alias sudo='sudo-rs'
+#alias sudo='sudo-rs'
 
 alias ida-dev='cd ~/projects/BILabs/IDA_DEV && source venv/bin/activate'
 
