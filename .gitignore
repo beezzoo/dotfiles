@@ -4,6 +4,10 @@
 .config/*
 !.config/bat/
 !.config/eza/
+# herdr: ведём только config.toml — рядом живут сокеты, логи и снапшоты сессий
+!.config/herdr/
+.config/herdr/*
+!.config/herdr/config.toml
 !.config/glow/
 !.config/superfile/
 !.config/tmux/

@@ -15,6 +15,7 @@
 | `.config/glow/`       | рендер markdown в терминале, стиль gruvbox                  |
 | `.config/bat/`        | замена cat                                                  |
 | `.config/eza/`        | замена ls                                                   |
+| `.config/herdr/`      | herdr: тема gruvbox + видимый разделитель сайдбара (`surface_dim`), сайдбар 34/24..48 |
 
 ## Установка
 

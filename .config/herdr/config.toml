@@ -1,0 +1,44 @@
+# managed by ansible (infra/roles/herdr_server); полный список ключей: herdr --default-config
+onboarding = false
+
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+[theme.custom]
+# Переопределения токенов поверх темы (surface_dim — цвет разделителя сайдбара и панелей)
+surface_dim = "#504945"
+
+[terminal]
+# login-shell в панелях: иначе вне macOS herdr стартует non-login shell и часть
+# пользовательского окружения (профильные файлы) не подхватывается
+shell_mode = "login"
+
+[ui]
+# Тонкий клиент (Blink/iPad): не делать полную перерисовку при возврате фокуса,
+# курсор рисует сам терминал. Сайдбар оставляем развёрнутым — в upstream он не анимируется.
+redraw_on_focus_gained = false
+host_cursor = "native"
+sidebar_start_collapsed = false
+# Ширина сайдбара (колонки). Upstream по умолчанию 26 / 18..36 — длинные имена узлов и
+# workspace обрезались. Ширина подстраивается под имена в пределах [min, max].
+sidebar_width = 34
+sidebar_min_width = 24
+sidebar_max_width = 48
+# dots (upstream) | symbols — отдельные статичные глифы для blocked/working/done/idle.
+status_indicators = "dots"
+
+[ui.toast]
+# off | herdr (тост внутри TUI) | terminal (OSC внешнему терминалу, проходит через ssh) | system.
+# Значение берётся с той машины, где живут панели (см. herdr_toast_delivery в инвентаре).
+delivery = "system"
+
+[ui.sound]
+# Звук при смене состояния агента в фоновом workspace.
+enabled = true
+
+[session]
+resume_agents_on_restore = true
+
+[remote]
+manage_ssh_config = true
